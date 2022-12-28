@@ -1,4 +1,5 @@
 # Copyright 2021 Cargill Incorporated
+# Copyright 2022 Bitwise IO, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,11 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: CI
+name: Rust
 
 on:
   push:
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
   schedule:
     - cron: "0 10 * * *"
 
@@ -24,25 +27,17 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-
-  run_lint:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+      - name: Print rustc version
+        run: rustc --version
       - name: Install Just
-        run: curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
-
-      - name: Lint Cylinder
+        run: cargo install just
+      - name: Lint
         run: just lint
-
-  test_build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install Just
-        run: curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
-
-      - name: Run Cylinder Tests
+      - name: Build
+        run: just build
+      - name: Run tests
         run: just test
