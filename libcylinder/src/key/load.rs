@@ -183,7 +183,7 @@ pub fn load_key(name: &str, search_path: &[PathBuf]) -> Result<Option<PrivateKey
 /// * The given file cannot be opened
 /// * The key cannot be loaded from the given file
 pub fn load_key_from_path(path: &Path) -> Result<PrivateKey, KeyLoadError> {
-    match File::open(&path) {
+    match File::open(path) {
         Ok(f) => match load_key_from_file(f) {
             Ok(key) => Ok(key),
             Err(e) => Err(KeyLoadError::with_source(
