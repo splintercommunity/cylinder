@@ -26,7 +26,7 @@ cylinder = { path = "../libcylinder", features = ["jwt", "key-load"] }
 clap = "2"
 dirs = "4"
 log = "0.4"
-flexi_logger = "0.19"
+flexi_logger = "0.24"
 
 [features]
 default = []
