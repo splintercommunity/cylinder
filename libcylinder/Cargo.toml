@@ -49,7 +49,7 @@ pem = ["openssl"]
 key-load = ["dirs", "log", "whoami"]
 
 [dependencies]
-base64 = { version = "0.13", optional = true }
+base64 = { version = "0.20", optional = true }
 dirs = { version = "4", optional = true }
 json = { version = "0.12", optional = true }
 log = { version = "0.4", optional = true }
