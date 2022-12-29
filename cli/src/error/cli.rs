@@ -28,7 +28,7 @@ struct Source {
 /// internal implementation detail of the function. This generally means that there is no specific
 /// information which can be returned that would help the caller of the function recover or
 /// otherwise take action.
-pub struct CliError {
+pub(crate) struct CliError {
     message: Option<String>,
     source: Option<Source>,
 }
@@ -105,7 +105,7 @@ impl fmt::Debug for CliError {
 }
 
 #[cfg(test)]
-pub mod tests {
+mod tests {
     use super::*;
 
     /// Tests that errors constructed with `CliError::from_source` return a debug string exactly
