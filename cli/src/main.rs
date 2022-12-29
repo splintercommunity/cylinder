@@ -28,7 +28,7 @@ use cylinder::{
     PrivateKey,
 };
 use flexi_logger::{LogSpecBuilder, Logger};
-use log::{error, info, LevelFilter};
+use log::{info, LevelFilter};
 
 use error::CliError;
 
@@ -68,7 +68,7 @@ enum JwtCommands {
     },
 }
 
-fn main() {
+fn main() -> Result<(), CliError> {
     let args = CylArgs::parse();
 
     let log_level = {
@@ -96,14 +96,10 @@ fn main() {
         Err(err) => panic!("Failed to start logger: {}", err),
     }
 
-    let res = match args.commands {
+    match args.commands {
         Commands::Jwt { commands } => match commands {
             JwtCommands::Generate { key } => handle_jwt_generate(key),
         },
-    };
-
-    if let Err(err) = res {
-        error!("{}", err);
     }
 }
 
