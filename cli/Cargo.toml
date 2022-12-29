@@ -23,7 +23,7 @@ edition = "2021"
 
 [dependencies]
 cylinder = { path = "../libcylinder", features = ["jwt", "key-load"] }
-clap = "2"
+clap = { version = "4", features = ["derive"] }
 dirs = "4"
 log = "0.4"
 flexi_logger = "0.24"
