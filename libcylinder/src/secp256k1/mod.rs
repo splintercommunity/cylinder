@@ -74,9 +74,9 @@ impl Context for Secp256k1Context {
     }
 
     fn get_public_key(&self, private_key: &PrivateKey) -> Result<PublicKey, ContextError> {
-        let sk = secp256k1::key::SecretKey::from_slice(private_key.as_slice())?;
+        let sk = secp256k1::SecretKey::from_slice(private_key.as_slice())?;
         Ok(PublicKey::new(
-            secp256k1::key::PublicKey::from_secret_key(&self.context, &sk)
+            secp256k1::PublicKey::from_secret_key(&self.context, &sk)
                 .serialize()
                 .to_vec(),
         ))
@@ -102,18 +102,18 @@ impl Signer for Secp256k1Signer {
 
     fn sign(&self, message: &[u8]) -> Result<Signature, SigningError> {
         let hash: &[u8] = &Sha256::digest(message);
-        let sk = secp256k1::key::SecretKey::from_slice(self.key.as_slice())?;
+        let sk = secp256k1::SecretKey::from_slice(self.key.as_slice())?;
         let sig = self
             .context
-            .sign(&secp256k1::Message::from_slice(hash)?, &sk);
+            .sign_ecdsa(&secp256k1::Message::from_slice(hash)?, &sk);
         let compact = sig.serialize_compact();
         Ok(Signature::new(compact.to_vec()))
     }
 
     fn public_key(&self) -> Result<PublicKey, SigningError> {
-        let sk = secp256k1::key::SecretKey::from_slice(self.key.as_slice())?;
+        let sk = secp256k1::SecretKey::from_slice(self.key.as_slice())?;
         Ok(PublicKey::new(
-            secp256k1::key::PublicKey::from_secret_key(&*self.context, &sk)
+            secp256k1::PublicKey::from_secret_key(&*self.context, &sk)
                 .serialize()
                 .to_vec(),
         ))
@@ -147,10 +147,10 @@ impl Verifier for Secp256k1Verifier {
         public_key: &PublicKey,
     ) -> Result<bool, VerificationError> {
         let hash: &[u8] = &Sha256::digest(message);
-        let result = self.context.verify(
+        let result = self.context.verify_ecdsa(
             &secp256k1::Message::from_slice(hash)?,
-            &secp256k1::Signature::from_compact(signature.as_slice())?,
-            &secp256k1::key::PublicKey::from_slice(public_key.as_slice())?,
+            &secp256k1::ecdsa::Signature::from_compact(signature.as_slice())?,
+            &secp256k1::PublicKey::from_slice(public_key.as_slice())?,
         );
         match result {
             Ok(()) => Ok(true),

@@ -17,7 +17,7 @@
 name = "cylinder"
 version = "0.3.0"
 authors = ["Bitwise IO, Inc.", "Cargill Incorporated", "Intel Corporation"]
-edition = "2018"
+edition = "2021"
 license = "Apache-2.0"
 readme = "../README.md"
 description = """\
@@ -49,18 +49,18 @@ pem = ["openssl"]
 key-load = ["dirs", "log", "whoami"]
 
 [dependencies]
-base64 = { version = "0.13", optional = true }
+base64 = { version = "0.20", optional = true }
 dirs = { version = "4", optional = true }
 json = { version = "0.12", optional = true }
 log = { version = "0.4", optional = true }
 openssl = { version = "0.10", optional = true }
 rand = "0.8"
-secp256k1 = "0.20"
+secp256k1 = "0.25"
 sha2 = "0.10"
-whoami = { version = "1.1", optional = true }
+whoami = { version = "1", optional = true }
 
 [dev-dependencies]
-serial_test = "0.5"
+serial_test = "0.10"
 tempfile = "3"
 
 [package.metadata.docs.rs]

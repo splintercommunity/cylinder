@@ -15,18 +15,18 @@
 
 [package]
 name = "cyl"
-version = "0.1.0"
+version = "0.3.0"
 authors = ["Cargill Incorporated"]
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 cylinder = { path = "../libcylinder", features = ["jwt", "key-load"] }
-clap = "2"
+clap = { version = "4", features = ["derive"] }
 dirs = "4"
 log = "0.4"
-flexi_logger = "0.19"
+flexi_logger = "0.24"
 
 [features]
 default = []

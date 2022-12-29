@@ -28,7 +28,7 @@ struct Source {
 /// internal implementation detail of the function. This generally means that there is no specific
 /// information which can be returned that would help the caller of the function recover or
 /// otherwise take action.
-pub struct CliError {
+pub(crate) struct CliError {
     message: Option<String>,
     source: Option<Source>,
 }
@@ -100,61 +100,42 @@ impl fmt::Display for CliError {
 
 impl fmt::Debug for CliError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let mut debug_struct = f.debug_struct("CliError");
-
-        if let Some(message) = &self.message {
-            debug_struct.field("message", message);
-        }
-
-        if let Some(source) = &self.source {
-            if let Some(prefix) = &source.prefix {
-                debug_struct.field("prefix", prefix);
-            }
-
-            debug_struct.field("source", &source.source);
-        }
-
-        debug_struct.finish()
+        write!(f, "{}", self)
     }
 }
 
 #[cfg(test)]
-pub mod tests {
+mod tests {
     use super::*;
 
-    /// Tests that errors constructed with `CliError::from_source` return a debug string of
-    /// the form `format!("CliError { {:?} }", source)`.
+    /// Tests that errors constructed with `CliError::from_source` return a debug string exactly
+    /// the same as Display.
     #[test]
     fn test_debug_from_source() {
         let msg = "test message";
-        let debug = "CliError { source: CliError { message: \"test message\" } }";
         let err = CliError::from_source(Box::new(CliError::with_message(msg.to_string())));
-        assert_eq!(format!("{:?}", err), debug);
+        assert_eq!(format!("{:?}", err), format!("{}", err));
     }
 
     /// Tests that errors constructed with `CliError::from_source_with_message` return a debug
-    /// string of the form `format!("CliError { message: {:?}, source: {:?} }", message,
-    /// source)`.
+    /// string exactly the same as Display.
     #[test]
     fn test_debug_from_source_with_message() {
         let msg = "test message";
-        let debug =
-            "CliError { message: \"test message\", source: CliError { message: \"unused\" } }";
         let err = CliError::from_source_with_message(
             Box::new(CliError::with_message("unused".to_string())),
             msg.to_string(),
         );
-        assert_eq!(format!("{:?}", err), debug);
+        assert_eq!(format!("{:?}", err), format!("{}", err));
     }
 
     /// Tests that errors constructed with `CliError::with_message` return a debug
-    /// string of the form `format!("CliError { message: {:?} }", message)`.
+    /// string exactly the same as Display.
     #[test]
     fn test_debug_with_message() {
         let msg = "test message";
-        let debug = "CliError { message: \"test message\" }";
         let err = CliError::with_message(msg.to_string());
-        assert_eq!(format!("{:?}", err), debug);
+        assert_eq!(format!("{:?}", err), format!("{}", err));
     }
 
     /// Tests that error constructed with `CliError::from_source` return a display

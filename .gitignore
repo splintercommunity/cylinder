@@ -1,4 +1,5 @@
 # Copyright 2017 Intel Corporation
+# Copyright 2022 Bitwise IO, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,16 +14,5 @@
 # limitations under the License.
 # ------------------------------------------------------------------------------
 
-# Exclude IDE and Editor files
-/.idea/
-*.sublime*
-
-/build/
-
-cli/target
-cli/Cargo.lock
-libcylinder/target
-libcylinder/Cargo.lock
-
-*.batch
-.coverage
+/target/
+/Cargo.lock
