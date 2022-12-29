@@ -18,13 +18,13 @@
 
 mod commands;
 mod error;
+mod logging;
 
 use clap::{Parser, Subcommand};
-use flexi_logger::{LogSpecBuilder, Logger};
-use log::LevelFilter;
 
 use commands::handle_jwt_generate;
 use error::CliError;
+use logging::configure_logging;
 
 /// Cylinder CLI
 #[derive(Parser)]
@@ -65,42 +65,11 @@ enum JwtCommands {
 fn main() -> Result<(), CliError> {
     let args = CylArgs::parse();
 
-    let log_level = {
-        match args.verbose as i8 - args.quiet as i8 {
-            i8::MIN..=-2 => LevelFilter::Error,
-            -1 => LevelFilter::Warn,
-            0 => LevelFilter::Info,
-            1 => LevelFilter::Debug,
-            2..=i8::MAX => LevelFilter::Trace,
-        }
-    };
-
-    let log_spec = LogSpecBuilder::new().default(log_level).build();
-
-    match Logger::with(log_spec)
-        .format(log_format)
-        .log_to_stdout()
-        .start()
-    {
-        Ok(_) => {}
-        #[cfg(test)]
-        // `FlexiLoggerError::Log` means the logger has already been initialized; this will happen
-        // when `run` is called more than once in the tests.
-        Err(flexi_logger::FlexiLoggerError::Log(_)) => {}
-        Err(err) => panic!("Failed to start logger: {}", err),
-    }
+    configure_logging(args.verbose as i8 - args.quiet as i8);
 
     match args.commands {
         Commands::Jwt { commands } => match commands {
             JwtCommands::Generate { key } => handle_jwt_generate(key),
         },
     }
-}
-
-pub fn log_format(
-    w: &mut dyn std::io::Write,
-    _now: &mut flexi_logger::DeferredNow,
-    record: &log::Record,
-) -> Result<(), std::io::Error> {
-    write!(w, "{}", record.args(),)
 }
