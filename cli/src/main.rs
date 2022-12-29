@@ -28,7 +28,7 @@ use cylinder::{
     PrivateKey,
 };
 use flexi_logger::{LogSpecBuilder, Logger};
-use log::{info, LevelFilter};
+use log::LevelFilter;
 
 use error::CliError;
 
@@ -113,7 +113,7 @@ fn handle_jwt_generate(key_name: Option<String>) -> Result<(), CliError> {
         CliError::from_source_with_message(Box::new(err), "failed to build json web token".into())
     })?;
 
-    info!("{}", encoded_token);
+    println!("{}", encoded_token);
 
     Ok(())
 }
