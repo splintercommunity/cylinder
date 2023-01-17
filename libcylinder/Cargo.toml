@@ -25,6 +25,12 @@ description = """\
 """
 repository = "https://github.com/cargill/cylinder"
 
+include = [
+    "src/**/*.rs",
+    "test/**/*.rs",
+    "Cargo.toml",
+]
+
 [features]
 default = []
 
