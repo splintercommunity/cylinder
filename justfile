@@ -84,3 +84,29 @@ test:
         done
     done
     echo "\n\033[92mTest Success\033[0m\n"
+
+version-check:
+    #!/usr/bin/env sh
+
+    set -e
+
+    version=$(cat VERSION)
+
+    cylinder_version=$(cargo metadata --format-version 1 --no-deps \
+        | jq '.packages[] | select(.name == "cylinder") | .version' \
+        | sed -e 's/"//g')
+    cyl_version=$(cargo metadata --format-version 1 --no-deps \
+        | jq '.packages[] | select(.name == "cyl") | .version' \
+        | sed -e 's/"//g')
+
+    if [ "$version" != "$cylinder_version" ]; then
+        echo "expected $version but found $cylinder_version in libcylinder/Cargo.toml"
+        exit 1
+    fi
+
+    if [ "$version" != "$cyl_version" ]; then
+        echo "expected $version but found $cyl_version in cli/Cargo.toml"
+        exit 1
+    fi
+
+    echo "Version OK: $version"

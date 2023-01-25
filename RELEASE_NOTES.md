@@ -1,5 +1,11 @@
 # Release Notes
 
+## Changes in Cylinder 0.3.0
+
+* Add a 'cyl' CLI command with a 'jwt generate' subcommand
+* Replace rust-crypto wtih sha2
+* Various dependency updates, including migration to Rust 2021 and clap 4
+
 ## Changes in Cylinder 0.2.4
 
 * Derives `Hash`, `PartialEq`, and `Eq` for `PublicKey` and `PrivateKey`. This
