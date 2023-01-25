@@ -20,7 +20,7 @@ The following resources are available for Cylinder:
 
   * [Crate](https://crates.io/crates/cylinder)
   * [Documentation](https://docs.rs/cylinder/latest/cylinder/)
-  * [Git Repository](https://github.com/Cargill/cylinder)
+  * [Git Repository](https://github.com/splintercommunity/cylinder)
 
 ## Projects using Cylinder
 

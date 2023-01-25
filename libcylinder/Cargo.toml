@@ -23,7 +23,7 @@ readme = "../README.md"
 description = """\
     Cylinder is a high-level cryptographic signing library.
 """
-repository = "https://github.com/cargill/cylinder"
+repository = "https://github.com/splintercommunity/cylinder"
 
 include = [
     "src/**/*.rs",
