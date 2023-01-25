@@ -16,8 +16,14 @@
 [package]
 name = "cyl"
 version = "0.3.0"
-authors = ["Cargill Incorporated"]
+authors = ["Bitwise IO, Inc.", "Cargill Incorporated"]
 edition = "2021"
+license = "Apache-2.0"
+readme = "../README.md"
+description = """\
+    Cyl is a high-level cryptographic signing CLI tool.
+"""
+repository = "https://github.com/cargill/cylinder"
 
 include = [
     "src/**/*.rs",
