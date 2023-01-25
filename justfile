@@ -99,6 +99,9 @@ version-check:
         | jq '.packages[] | select(.name == "cyl") | .version' \
         | sed -e 's/"//g')
 
+    cyl_dep_version=$(cat cli/Cargo.toml \
+        | grep "# cylinder Version" | sed -e 's/^.*"=//' -e 's/".*//')
+
     if [ "$version" != "$cylinder_version" ]; then
         echo "expected $version but found $cylinder_version in libcylinder/Cargo.toml"
         exit 1
@@ -106,6 +109,11 @@ version-check:
 
     if [ "$version" != "$cyl_version" ]; then
         echo "expected $version but found $cyl_version in cli/Cargo.toml"
+        exit 1
+    fi
+
+    if [ "$version" != "$cyl_dep_version" ]; then
+        echo "expected $version but found $cyl_dep_version in cli/Cargo.toml for the cylinder dependency"
         exit 1
     fi
 
