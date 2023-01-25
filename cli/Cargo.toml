@@ -23,7 +23,7 @@ readme = "../README.md"
 description = """\
     Cyl is a high-level cryptographic signing CLI tool.
 """
-repository = "https://github.com/cargill/cylinder"
+repository = "https://github.com/splintercommunity/cylinder"
 
 include = [
     "src/**/*.rs",
