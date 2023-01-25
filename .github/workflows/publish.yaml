@@ -48,6 +48,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Publish release to crates
-        run:
+        run: |
           CARGO_TOKEN=${{ secrets.CARGO_TOKEN }} cargo publish -p cylinder
           CARGO_TOKEN=${{ secrets.CARGO_TOKEN }} cargo publish -p cyl
