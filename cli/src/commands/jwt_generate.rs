@@ -36,7 +36,7 @@ pub(crate) fn handle_jwt_generate(key_name: Option<String>) -> Result<(), CliErr
         CliError::from_source_with_message(Box::new(err), "failed to build json web token".into())
     })?;
 
-    println!("{}", encoded_token);
+    println!("{encoded_token}");
 
     Ok(())
 }

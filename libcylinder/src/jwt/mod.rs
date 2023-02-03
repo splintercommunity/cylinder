@@ -321,7 +321,7 @@ impl<'a> JsonWebTokenParser<'a> {
         let verified = self
             .verifier
             .verify(
-                format!("{}.{}", encoded_header, encoded_claims).as_bytes(),
+                format!("{encoded_header}.{encoded_claims}").as_bytes(),
                 &Signature::new(signature_bytes),
                 &public_key,
             )

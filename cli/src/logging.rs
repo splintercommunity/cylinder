@@ -41,7 +41,7 @@ pub(crate) fn configure_logging(log_level: i8) {
         // `FlexiLoggerError::Log` means the logger has already been initialized; this will happen
         // when `run` is called more than once in the tests.
         Err(flexi_logger::FlexiLoggerError::Log(_)) => {}
-        Err(err) => panic!("Failed to start logger: {}", err),
+        Err(err) => panic!("Failed to start logger: {err}"),
     }
 }
 
