@@ -23,7 +23,7 @@ use std::error::Error;
 pub fn hex_str_to_bytes(s: &str) -> Result<Vec<u8>, HexError> {
     for (i, ch) in s.chars().enumerate() {
         if !ch.is_ascii_hexdigit() {
-            return Err(HexError(format!("invalid character position {}", i)));
+            return Err(HexError(format!("invalid character position {i}")));
         }
     }
 
@@ -42,7 +42,7 @@ pub fn hex_str_to_bytes(s: &str) -> Result<Vec<u8>, HexError> {
 /// Converts the given bytes to a hex string
 pub fn bytes_to_hex_str(b: &[u8]) -> String {
     b.iter()
-        .map(|b| format!("{:02x}", b))
+        .map(|b| format!("{b:02x}"))
         .collect::<Vec<_>>()
         .join("")
 }

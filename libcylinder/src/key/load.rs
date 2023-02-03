@@ -188,12 +188,12 @@ pub fn load_key_from_path(path: &Path) -> Result<PrivateKey, KeyLoadError> {
             Ok(key) => Ok(key),
             Err(e) => Err(KeyLoadError::with_source(
                 Box::new(e),
-                &format!("Unable to load key from path: {:?}", path),
+                &format!("Unable to load key from path: {path:?}"),
             )),
         },
         Err(err) => Err(KeyLoadError::with_source(
             Box::new(err),
-            &format!("Unable to open key file: {:?}", path),
+            &format!("Unable to open key file: {path:?}"),
         )),
     }
 }
@@ -221,10 +221,7 @@ fn load_key_from_file(file: File) -> Result<PrivateKey, KeyLoadError> {
         Some(key) => PrivateKey::new_from_hex(key.trim()).map_err(|err| {
             KeyLoadError::with_source(Box::new(err), "unable to create private key from hex")
         }),
-        None => Err(KeyLoadError::new(&format!(
-            "Empty key file: {:?}",
-            key_file
-        ))),
+        None => Err(KeyLoadError::new(&format!("Empty key file: {key_file:?}"))),
     }
 }
 

@@ -86,7 +86,7 @@ impl error::Error for CliError {
 impl fmt::Display for CliError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match &self.message {
-            Some(m) => write!(f, "{}", m),
+            Some(m) => write!(f, "{m}"),
             None => match &self.source {
                 Some(s) => match &s.prefix {
                     Some(p) => write!(f, "{}: {}", p, s.source),
@@ -100,7 +100,7 @@ impl fmt::Display for CliError {
 
 impl fmt::Debug for CliError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self)
+        write!(f, "{self}")
     }
 }
 
