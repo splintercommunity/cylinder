@@ -52,7 +52,7 @@ clean:
         $cmd
     done
 
-lint:
+lint: version-check
     #!/usr/bin/env sh
     set -e
     for feature in $(echo {{features}})
