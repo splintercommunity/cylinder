@@ -414,7 +414,7 @@ mod tests {
         let env_key_name = "CYLINDER_KEY_NAME";
         let env_key_path = "CYLINDER_PATH";
         env::set_var(env_key_name, "test_key");
-        env::set_var(env_key_path, paths.clone());
+        env::set_var(env_key_path, paths);
         assert_eq!(env::var("CYLINDER_KEY_NAME"), Ok("test_key".to_string()));
         assert_eq!(env::var("CYLINDER_PATH"), Ok(paths.to_string()));
 
