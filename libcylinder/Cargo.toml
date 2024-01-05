@@ -56,7 +56,7 @@ key-load = ["dirs", "log", "whoami"]
 
 [dependencies]
 base64 = { version = "0.20", optional = true }
-dirs = { version = "4", optional = true }
+dirs = { version = "5", optional = true }
 json = { version = "0.12", optional = true }
 log = { version = "0.4", optional = true }
 openssl = { version = "0.10", optional = true }
