@@ -28,7 +28,7 @@ The following projects are currently using Cylinder:
 
 * [Hyperledger Grid](https://grid.hyperledger.org/)
 * [Hyperledger Sawtooth](https://sawtooth.hyperledger.org/)
-* [Hyperledger Transact](https://github.com/hyperledger/transact)
+* [Transact](https://github.com/splintercommunity/transact)
 * [Splinter](https://www.splinter.dev/)
 
 ## License
