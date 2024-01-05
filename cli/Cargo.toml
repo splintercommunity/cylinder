@@ -37,7 +37,7 @@ cylinder = { path = "../libcylinder", features = ["jwt", "key-load"], version = 
 clap = { version = "4", features = ["derive"] }
 dirs = "5"
 log = "0.4"
-flexi_logger = "0.24"
+flexi_logger = "0.27"
 
 [features]
 default = []
