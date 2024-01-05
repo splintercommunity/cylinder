@@ -26,11 +26,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Print rustc version
         run: rustc --version
       - name: Install Just
-        run: cargo install just
+        run: sudo snap install --edge --classic just
       - name: Check version
         run: just version-check
       - name: Lint
@@ -46,7 +46,7 @@ jobs:
       github.repository_owner == 'splintercommunity'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Publish release to crates
         run: |
           CARGO_REGISTRY_TOKEN=${{ secrets.CARGO_TOKEN }} cargo publish -p cylinder
