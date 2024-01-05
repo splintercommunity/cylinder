@@ -1,5 +1,10 @@
 # Release Notes
 
+## Changes in Cylinder 0.3.1
+
+* Update README.md with new Transact repo location
+* Various dependency updates
+
 ## Changes in Cylinder 0.3.0
 
 * Add a 'cyl' CLI command with a 'jwt generate' subcommand
