@@ -105,7 +105,7 @@ impl Signer for Secp256k1Signer {
         let sk = secp256k1::SecretKey::from_slice(self.key.as_slice())?;
         let sig = self
             .context
-            .sign_ecdsa(&secp256k1::Message::from_slice(hash)?, &sk);
+            .sign_ecdsa(&secp256k1::Message::from_digest_slice(hash)?, &sk);
         let compact = sig.serialize_compact();
         Ok(Signature::new(compact.to_vec()))
     }
@@ -148,7 +148,7 @@ impl Verifier for Secp256k1Verifier {
     ) -> Result<bool, VerificationError> {
         let hash: &[u8] = &Sha256::digest(message);
         let result = self.context.verify_ecdsa(
-            &secp256k1::Message::from_slice(hash)?,
+            &secp256k1::Message::from_digest_slice(hash)?,
             &secp256k1::ecdsa::Signature::from_compact(signature.as_slice())?,
             &secp256k1::PublicKey::from_slice(public_key.as_slice())?,
         );
