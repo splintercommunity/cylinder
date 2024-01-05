@@ -35,9 +35,9 @@ include = [
 [dependencies]
 cylinder = { path = "../libcylinder", features = ["jwt", "key-load"], version = "=0.3.1" } # cylinder Version
 clap = { version = "4", features = ["derive"] }
-dirs = "4"
+dirs = "5"
 log = "0.4"
-flexi_logger = "0.24"
+flexi_logger = "0.27"
 
 [features]
 default = []

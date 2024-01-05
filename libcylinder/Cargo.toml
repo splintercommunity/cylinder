@@ -56,17 +56,17 @@ key-load = ["dirs", "log", "whoami"]
 
 [dependencies]
 base64 = { version = "0.20", optional = true }
-dirs = { version = "4", optional = true }
+dirs = { version = "5", optional = true }
 json = { version = "0.12", optional = true }
 log = { version = "0.4", optional = true }
 openssl = { version = "0.10", optional = true }
 rand = "0.8"
-secp256k1 = "0.25"
+secp256k1 = "0.28"
 sha2 = "0.10"
 whoami = { version = "1", optional = true }
 
 [dev-dependencies]
-serial_test = "0.10"
+serial_test = "2"
 tempfile = "3"
 
 [package.metadata.docs.rs]
